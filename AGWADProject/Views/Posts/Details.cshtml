@@ -1,0 +1,63 @@
+﻿@model AGWADProject.Models.Post
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container my-5">
+    <div class="card shadow rounded overflow-hidden">
+
+
+        @if (!string.IsNullOrEmpty(Model.CoverPhotoPath))
+        {
+            <div class="text-center bg-dark">
+                <img src="@Model.CoverPhotoPath" alt="Cover Photo" class="w-100 img-fluid" style="width: 100%; height: 700px;" />
+            </div>
+        }
+        else
+        {
+            <div class="bg-light text-center text-muted p-5">No cover photo available</div>
+        }
+
+
+        <div class="p-4">
+            <h2 class="mb-4">@Model.Title</h2>
+
+            <dl class="row">
+                <dt class="col-sm-4">Descriere</dt>
+                <dd class="col-sm-8">@Model.Description</dd>
+
+                <dt class="col-sm-4">Pret</dt>
+                <dd class="col-sm-8">@Model.Price.ToString("C")</dd>
+
+                <dt class="col-sm-4">Postat la</dt>
+                <dd class="col-sm-8">@Model.PostedOn.ToString("MMMM dd, yyyy")</dd>
+
+                <dt class="col-sm-4">Postat de</dt>
+                <dd class="col-sm-8">@Model.Person?.FirstName @Model.Person?.LastName</dd>
+
+                <dt class="col-sm-4">Numar de contact</dt>
+                <dd class="col-sm-8">@Model.PhoneNumber</dd>
+
+
+                <dt class="col-sm-4">Auto</dt>
+                <dd class="col-sm-8">@Model.Car?.Make @Model.Car?.Model</dd>
+
+                <dt class="col-sm-4">Transmisie</dt>
+                <dd class="col-sm-8">@Model.Car?.TransmissionType?.Name</dd>
+
+                <dt class="col-sm-4">Combustibil</dt>
+                <dd class="col-sm-8">@Model.Car?.FuelType?.Name</dd>
+
+            </dl>
+
+            <div class="mt-4">
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary me-2">Edit</a>
+                    }
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

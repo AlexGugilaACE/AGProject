@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link rel="stylesheet" href="~/css/home-style.css" />
+<link rel="stylesheet" href="~/css/styles.css" />
+<script src="~/js/script.js"></script>
+
+<main class="page-content-home">
+    <h1 class="main-title">Vinzi si cumperi cu ajutorul AG Auto!</h1>
+    <div class="search-box" id="searchBox">
+        <!-- <div class="set" id="set1"> -->
+        <select id="marca" class="selector">
+            <option value="">Alege marca</option>
+            <option value="volkswagen">Volkswagen</option>
+            <option value="bmw">BMW</option>
+            <option value="audi">Audi</option>
+            <option value="mercedes">Mercedes</option>
+        </select>
+        <div class="despartitor"></div>
+        <select id="model" class="selector">
+            <option value="">Alege modelul</option>
+        </select>
+        <div class="despartitor"></div>
+        <select id="an" class="selector">
+            <option value="">An: de la</option>
+        </select>
+        <div class="despartitor"></div>
+        <select id="an" class="selector">
+            <option value="">An: pana la</option>
+        </select>
+        <form asp-controller="Posts" asp-action="SearchByMake" method="get">
+        <button class="buton-lupa"><svg width="20px" height="20px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" class="svg-search"><path d="M17.545 15.467l-3.779-3.779a6.15 6.15 0 0 0 .898-3.21c0-3.417-2.961-6.377-6.378-6.377A6.185 6.185 0 0 0 2.1 8.287c0 3.416 2.961 6.377 6.377 6.377a6.15 6.15 0 0 0 3.115-.844l3.799 3.801a.953.953 0 0 0 1.346 0l.943-.943c.371-.371.236-.84-.135-1.211zM4.004 8.287a4.282 4.282 0 0 1 4.282-4.283c2.366 0 4.474 2.107 4.474 4.474a4.284 4.284 0 0 1-4.283 4.283c-2.366-.001-4.473-2.109-4.473-4.474z" /></svg>Caută</button>
+        </form>
+
+        <div class="extra-filters" id="extraFilters">
+            <select class="selector" id="combustibil">
+                <option value="">Combustibil</option>
+                <option value="benzina">Benzină</option>
+                <option value="motorina">Motorină</option>
+                <option value="electric">Electric</option>
+            </select>
+            <div class="despartitor"></div>
+            <select class="selector" id="transmisie">
+                <option value="">Transmisie</option>
+                <option value="manuala">Manuală</option>
+                <option value="automata">Automată</option>
+            </select>
+            <div class="despartitor"></div>
+            <select id="kilometraj" class="selector">
+                <option value="">Kilometraj: de la</option>
+            </select>
+            <div class="despartitor"></div>
+            <select id="kilometraj" class="selector">
+                <option value="">Kilometraj: pana la</option>
+            </select>
+        </div>
+        <!-- </div> -->
+    </div>
+
+    <button class="buton-filtre" onclick="toggleFilters()">Extinde filtrele</button>
+
+    <div class="container-vrei-sa">
+        <div class="vrei-sa vrei-sa-vinzi">
+            <h2>Vrei să vinzi o mașină?</h2>
+            <p>O poți vinde simplu și rapid dacă îndeplinește condițiile:</p>
+            <p>Kilometraj: maxim 180.000</p>
+            <p>Vechime: maxim 10 ani</p>
+            <p>Nu prezintă avarii la momentul publicării</p>
+            <a class="buton-vrei-sa1" asp-controller="Posts" asp-action="Index"><span>Publică anunț</span></a>
+        </div>
+        <div class="vrei-sa vrei-sa-cumperi">
+            <h2>Vrei să cumperi o mașină?</h2>
+            <p>Am prefiltrat pentru tine anunțuri de calitate</p>
+            <p>Mașini puțin rulate și sigure</p>
+            <p>Istoric verificabil</p>
+            <a class="buton-vrei-sa2" asp-controller="Posts" asp-action="SearchByMake"><span>Găsește-ți mașina perfectă</span></a>
+        </div>
+    </div>
+
+</main>

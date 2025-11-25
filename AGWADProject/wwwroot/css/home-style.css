@@ -1,0 +1,163 @@
+﻿.page-content-home {
+    margin-top: 0px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    padding: 20px;
+}
+
+.main-title {
+    font-size: 48px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    width: 700px;
+    height: 60px;
+    background-color: white;
+    border-radius: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    transition: height 0.4s ease-in-out;
+    margin-bottom: 12px;
+}
+
+#marca, #model, #an, #kilometraj, #transmisie, #combustibil {
+    width: auto;
+    height: 30px;
+    border: none;
+}
+
+.despartitor {
+    height: 30px;
+    width: 1px;
+    background-color: grey;
+}
+
+.buton-filtre {
+    margin-top: 15px;
+    background-color: rgb(192, 58, 46);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    width: 160px;
+    height: 40px;
+    padding-right: 6px;
+    padding-left: 6px;
+    cursor: pointer;
+}
+
+    .buton-filtre:hover {
+        width: 170px;
+        height: 50px;
+        transition: 0.5s;
+        background-color: rgb(150, 37, 27);
+    }
+
+.extra-filters {
+    display: none;
+    width: 100%;
+    margin-top: 10px;
+}
+
+    .extra-filters.visible {
+        display: flex;
+        justify-content: space-between;
+    }
+
+.search-box.expanded {
+    height: 150px; /* Înălțime mai mare când este extins */
+}
+
+.svg-search {
+    fill: white;
+}
+
+.buton-lupa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(192, 58, 46);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    padding: 10px;
+    width: 150px;
+    cursor: pointer;
+}
+
+    .buton-lupa:hover {
+        background-color: rgb(150, 37, 27);
+        transition: 0.5s;
+    }
+
+.container-vrei-sa {
+    margin-top: 30px;
+    width: 130%;
+    height: 400px;
+    /* background-color: red; */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    column-gap: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    color: white;
+}
+
+.vrei-sa {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    padding-left: 70px;
+}
+
+.vrei-sa-cumperi {
+    border-radius: 15px;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), url('/media/buy-car.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.vrei-sa-vinzi {
+    border-radius: 15px;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4)), url('/media/sell-car.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container-vrei-sa h2 {
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.buton-vrei-sa1, .buton-vrei-sa2 {
+    height: 40px;
+    background-color: white;
+    text-decoration: none;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.buton-vrei-sa1 {
+    width: 130px;
+}
+
+.buton-vrei-sa2 {
+    width: 230px;
+}

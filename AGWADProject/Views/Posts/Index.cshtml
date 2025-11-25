@@ -1,0 +1,60 @@
+﻿@model IEnumerable<AGWADProject.Models.Post>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Gaseste masina dorita!</h1>
+<h4>Numarul total de anunturi: @ViewBag.TotalPostCount</h4>
+<p>
+    <a asp-action="Create" class="btn btn-primary">Adauga anunt!</a>
+    <a asp-action="SearchByMake" class="btn btn-danger">Gaseste anunt!</a>
+</p>
+
+<table class="table table-striped align-middle">
+    <thead>
+        <tr>
+            <th>Foto</th>
+            <th>Titlu</th>
+            <th>Descriere</th>
+            <th>Preț</th>
+            <th>Postat la</th>
+            <th>Persoană</th>
+            <th>Mașină</th>
+            <th>Acțiuni</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="width: 120px; height: 90px; padding: 0;">
+                    @if (!string.IsNullOrEmpty(item.CoverPhotoPath))
+                    {
+                        <img src="@item.CoverPhotoPath" alt="Cover Photo" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted d-flex justify-content-center align-items-center" style="width: 120px; height: 90px;">No Photo</span>
+                    }
+                </td>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>@item.Price.ToString("C")</td>
+                <td>@item.PostedOn.ToString("dd/MM/yyyy")</td>
+                <td>@item.Person?.FirstName @item.Person?.LastName</td>
+                <td>@item.Car?.Make @item.Car?.Model</td>
+                <td style="width: 200px; text-align: center;">
+                    
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-secondary" style="background-color: brown; border-color: none;">Details</a>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
+                    }
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

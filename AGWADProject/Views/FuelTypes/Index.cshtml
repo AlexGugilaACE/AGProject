@@ -1,0 +1,27 @@
+﻿@model List<FuelType>
+
+
+<a class="btn btn-primary" asp-controller="FuelTypes" asp-action="Create">Create</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Type
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var entry in Model)
+        {
+            <tr>
+                <td>@entry.Id</td>
+                <td>@entry.Name</td>
+                <td>Edit and Delete!</td>
+            </tr>
+        }
+    </tbody>
+</table>
