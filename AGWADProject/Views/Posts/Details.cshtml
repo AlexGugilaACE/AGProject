@@ -1,63 +1,101 @@
 ﻿@model AGWADProject.Models.Post
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Post Details";
 }
 
 <div class="container my-5">
-    <div class="card shadow rounded overflow-hidden">
-
+    <div class="card border-0 shadow-sm overflow-hidden">
 
         @if (!string.IsNullOrEmpty(Model.CoverPhotoPath))
         {
-            <div class="text-center bg-dark">
-                <img src="@Model.CoverPhotoPath" alt="Cover Photo" class="w-100 img-fluid" style="width: 100%; height: 700px;" />
+            <div class="bg-light text-center">
+                <img src="@Model.CoverPhotoPath"
+                     alt="Cover Photo"
+                     class="img-fluid w-100"
+                     style="max-height: 520px; object-fit: contain;" />
             </div>
         }
         else
         {
-            <div class="bg-light text-center text-muted p-5">No cover photo available</div>
+            <div class="bg-light text-center text-muted py-5">
+                <span>No cover photo available</span>
+            </div>
         }
 
+        <div class="card-body p-4 p-lg-5">
 
-        <div class="p-4">
-            <h2 class="mb-4">@Model.Title</h2>
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start mb-4">
+                <div>
+                    <h2 class="fw-semibold mb-1">@Model.Title</h2>
+                    <p class="text-muted mb-0">
+                        Posted on @Model.PostedOn.ToString("MMMM dd, yyyy")
+                    </p>
+                </div>
 
-            <dl class="row">
-                <dt class="col-sm-4">Descriere</dt>
-                <dd class="col-sm-8">@Model.Description</dd>
-
-                <dt class="col-sm-4">Pret</dt>
-                <dd class="col-sm-8">@Model.Price.ToString("C")</dd>
-
-                <dt class="col-sm-4">Postat la</dt>
-                <dd class="col-sm-8">@Model.PostedOn.ToString("MMMM dd, yyyy")</dd>
-
-                <dt class="col-sm-4">Postat de</dt>
-                <dd class="col-sm-8">@Model.Person?.FirstName @Model.Person?.LastName</dd>
-
-                <dt class="col-sm-4">Numar de contact</dt>
-                <dd class="col-sm-8">@Model.PhoneNumber</dd>
-
-
-                <dt class="col-sm-4">Auto</dt>
-                <dd class="col-sm-8">@Model.Car?.Make @Model.Car?.Model</dd>
-
-                <dt class="col-sm-4">Transmisie</dt>
-                <dd class="col-sm-8">@Model.Car?.TransmissionType?.Name</dd>
-
-                <dt class="col-sm-4">Combustibil</dt>
-                <dd class="col-sm-8">@Model.Car?.FuelType?.Name</dd>
-
-            </dl>
-
-            <div class="mt-4">
-                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                    {
-                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary me-2">Edit</a>
-                    }
-                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                <div class="mt-3 mt-md-0">
+                    <span class="fs-3 fw-bold text-success">
+                        @Model.Price.ToString("C")
+                    </span>
+                </div>
             </div>
+
+            <hr />
+
+            <div class="mb-4">
+                <h5 class="fw-semibold mb-2">Description</h5>
+                <p class="text-muted">@Model.Description</p>
+            </div>
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+                    <div class="border rounded p-3 h-100">
+                        <h6 class="fw-semibold mb-3">Seller Information</h6>
+                        <dl class="row mb-0 small">
+                            <dt class="col-5">Posted by</dt>
+                            <dd class="col-7">@Model.Person?.FirstName @Model.Person?.LastName</dd>
+
+                            <dt class="col-5">Phone</dt>
+                            <dd class="col-7">@Model.PhoneNumber</dd>
+                        </dl>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="border rounded p-3 h-100">
+                        <h6 class="fw-semibold mb-3">Vehicle Details</h6>
+                        <dl class="row mb-0 small">
+                            <dt class="col-5">Car</dt>
+                            <dd class="col-7">@Model.Car?.Make @Model.Car?.Model</dd>
+
+                            <dt class="col-5">Transmission</dt>
+                            <dd class="col-7">@Model.Car?.TransmissionType?.Name</dd>
+
+                            <dt class="col-5">Fuel</dt>
+                            <dd class="col-7">@Model.Car?.FuelType?.Name</dd>
+                        </dl>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-5 d-flex justify-content-between">
+                <a asp-action="Index"
+                   class="btn btn-outline-secondary">
+                    ← Back to List
+                </a>
+
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <a asp-action="Edit"
+                       asp-route-id="@Model.Id"
+                       class="btn btn-primary">
+                        Edit Post
+                    </a>
+                }
+            </div>
+
         </div>
     </div>
 </div>

@@ -1,60 +1,108 @@
 ﻿@model IEnumerable<AGWADProject.Models.Post>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Posts";
 }
 
-<h1>Gaseste masina dorita!</h1>
-<h4>Numarul total de anunturi: @ViewBag.TotalPostCount</h4>
-<p>
-    <a asp-action="Create" class="btn btn-primary">Adauga anunt!</a>
-    <a asp-action="SearchByMake" class="btn btn-danger">Gaseste anunt!</a>
-</p>
+<div class="container my-4">
 
-<table class="table table-striped align-middle">
-    <thead>
-        <tr>
-            <th>Foto</th>
-            <th>Titlu</th>
-            <th>Descriere</th>
-            <th>Preț</th>
-            <th>Postat la</th>
-            <th>Persoană</th>
-            <th>Mașină</th>
-            <th>Acțiuni</th>
-        </tr>
-    </thead>
-    <tbody>
+    <div class="mb-4">
+        <h2 class="fw-semibold">Găsește mașina dorită</h2>
+        <p class="text-muted mb-2">
+            Numărul total de anunțuri: <strong>@ViewBag.TotalPostCount</strong>
+        </p>
+
+        <div class="d-flex gap-2">
+            <a asp-action="Create" class="btn btn-primary">
+                Adaugă anunț
+            </a>
+            <a asp-action="SearchByMake" class="btn btn-outline-secondary">
+                Caută anunț
+            </a>
+        </div>
+    </div>
+
+    <div class="row g-4">
         @foreach (var item in Model)
         {
-            <tr>
-                <td style="width: 120px; height: 90px; padding: 0;">
-                    @if (!string.IsNullOrEmpty(item.CoverPhotoPath))
-                    {
-                        <img src="@item.CoverPhotoPath" alt="Cover Photo" style="width: 100%; height: 100%; object-fit: cover; display: block;" />
-                    }
-                    else
-                    {
-                        <span class="text-muted d-flex justify-content-center align-items-center" style="width: 120px; height: 90px;">No Photo</span>
-                    }
-                </td>
-                <td>@item.Title</td>
-                <td>@item.Description</td>
-                <td>@item.Price.ToString("C")</td>
-                <td>@item.PostedOn.ToString("dd/MM/yyyy")</td>
-                <td>@item.Person?.FirstName @item.Person?.LastName</td>
-                <td>@item.Car?.Make @item.Car?.Model</td>
-                <td style="width: 200px; text-align: center;">
-                    
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-secondary" style="background-color: brown; border-color: none;">Details</a>
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                    {
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-primary">Edit</a>
-                    }
-                    
-                </td>
-            </tr>
+            <div class="col-12">
+                <div class="card border-0 shadow-sm h-100">
+
+                    <div class="row g-0">
+
+                        <div class="col-md-3 bg-light d-flex align-items-center justify-content-center">
+                            @if (!string.IsNullOrEmpty(item.CoverPhotoPath))
+                            {
+                                <img src="@item.CoverPhotoPath"
+                                     class="img-fluid rounded-start"
+                                     style="max-height: 180px; object-fit: contain;"
+                                     alt="Photo" />
+                            }
+                            else
+                            {
+                                <span class="text-muted">No photo</span>
+                            }
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <h5 class="card-title fw-semibold">@item.Title</h5>
+                                <p class="card-text text-muted small mb-2">
+                                    @item.Description
+                                </p>
+
+                                <p class="mb-1 small">
+                                    <strong>Mașină:</strong>
+                                    @item.Car?.Make @item.Car?.Model
+                                </p>
+
+                                <p class="mb-0 small">
+                                    <strong>Postat de:</strong>
+                                    @item.Person?.FirstName @item.Person?.LastName
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="card-body text-md-end h-100 d-flex flex-column justify-content-between">
+
+                                <div>
+                                    <div class="fs-5 fw-bold text-success">
+                                        @item.Price.ToString("C")
+                                    </div>
+                                    <div class="text-muted small">
+                                        @item.PostedOn.ToString("dd/MM/yyyy")
+                                    </div>
+                                </div>
+
+                                <div class="mt-3 d-flex justify-content-md-end gap-2">
+                                    <a asp-action="Details"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-outline-secondary btn-sm">
+                                        Details
+                                    </a>
+
+                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                    {
+                                        <a asp-action="Edit"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-sm btn-primary">
+                                            Edit
+                                        </a>
+                                        <a asp-action="Delete"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-sm btn-danger">
+                                            Delete
+                                        </a>
+                                    }
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+</div>
